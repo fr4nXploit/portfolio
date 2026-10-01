@@ -54,7 +54,10 @@
 .career-tabs button[aria-selected='true'] { color: var(--text); padding-left: 15px; background: #202328; }
 .career-tabs button:hover { color: var(--text); }
 .career-tab-index { font: 9px var(--mono); color: #879cff; }
-.career-tabs button strong { display: block; font-size: 24px; line-height: 1.1; font-weight: 500; letter-spacing: -1px; }
+.career-tab-label { min-width: 0; }
+.career-tab-logo { display: block; width: 100px; height: 30px; max-width: 100%; object-fit: contain; object-position: left center; filter: brightness(0) invert(.6); transition: filter 250ms; }
+.career-tabs button:hover .career-tab-logo, .career-tabs button:focus-visible .career-tab-logo { filter: brightness(0) invert(.76); }
+.career-tabs button[aria-selected='true'] .career-tab-logo { filter: brightness(0) invert(.86); }
 .career-tabs button small { display: block; font-size: 10px; margin-top: 7px; }
 .career-tab-arrow { margin-left: auto; font-size: 24px; transition: rotate 250ms; }
 .career-tabs button[aria-selected='true'] .career-tab-arrow { rotate: 45deg; color: var(--accent); }
@@ -276,7 +279,7 @@
   .career-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 30px; }
   .career-tabs button, .career-tabs button[aria-selected='true'] { padding: 15px 10px; border-block: 1px solid var(--line); flex-direction: column; align-items: flex-start; gap: 8px; }
   .career-tabs button[aria-selected='true'] { border-bottom-color: var(--accent); }
-  .career-tabs button strong { font-size: 22px; }
+  .career-tab-logo { width: 72px; height: 24px; }
   .career-tabs button small { font-size: 8px; line-height: 1.5; }
   .career-tab-arrow { display: none; }
   .career-index-note { font-size: 7px; margin-top: 15px; }

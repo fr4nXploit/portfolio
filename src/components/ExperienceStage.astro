@@ -3,8 +3,8 @@ import { Image } from 'astro:assets';
 import { experience } from '../data/profile';
 import { brands } from '../data/brands';
 const chapters = [
-  { ...experience[1], id: 'engineering', year: '2025', label: 'Detection & response', title: ['Detectar mejor.', 'Responder con criterio.'], logo: brands.bcp },
   { ...experience[0], id: 'integrations', year: '2026', label: 'Integraciones & automatización', title: ['Conectar servicios.', 'Entender la escala.'], logo: brands.bbva },
+  { ...experience[1], id: 'engineering', year: '2025', label: 'Detection & response', title: ['Detectar mejor.', 'Responder con criterio.'], logo: brands.bcp },
   { ...experience[2], id: 'foundations', year: '2024', label: 'Evaluación defensiva', title: ['Evaluar controles.', 'Conocer sus límites.'], logo: brands.bcp },
 ];
 ---
@@ -14,7 +14,7 @@ const chapters = [
     <h2>Donde el <br/>criterio<br/><em>se prueba.</em></h2>
     <p>Seguridad, operación y software.<br/>Tres etapas. Una visión conectada.</p>
     <div class="career-tabs" aria-label="Etapas de experiencia">
-      {chapters.map((chapter, index) => <button type="button" id={`tab-${chapter.id}`} data-career-tab={chapter.id} aria-controls={`career-${chapter.id}`}><span class="career-tab-index">0{index + 1}</span><span><strong>{chapter.company}</strong><small>{chapter.label}</small></span><span class="career-tab-arrow" aria-hidden="true">↗</span></button>)}
+      {chapters.map((chapter, index) => <button type="button" id={`tab-${chapter.id}`} data-career-tab={chapter.id} aria-controls={`career-${chapter.id}`}><span class="career-tab-index">0{index + 1}</span><span class="career-tab-label"><Image class="career-tab-logo" src={chapter.logo} alt={chapter.company} width={220} format="webp" loading="lazy" /><small>{chapter.label}</small></span><span class="career-tab-arrow" aria-hidden="true">↗</span></button>)}
     </div>
     <span class="career-index-note">SELECCIONA UNA ETAPA ↑</span>
   </div>

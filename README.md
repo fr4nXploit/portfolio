@@ -25,9 +25,9 @@ Se prioriza HTML y CSS nativos. La fuente Manrope se sirve localmente. Los detal
 
 ## Dirección visual y movimiento
 
-`src/styles/experimental.css` define la dirección editorial en negro, hueso y ultramarino, el retrato en capas, las órbitas CSS y la galería asimétrica. `src/components/Motion.astro` controla el paralaje suave, la tipografía ligada al scroll, las entradas con IntersectionObserver, el CTA magnético y el indicador de lectura; no requiere librerías de animación.
+`src/styles/experimental.css` define la dirección editorial en negro, hueso y ultramarino, el retrato en capas, las órbitas CSS y la galería asimétrica. `src/components/Motion.astro` controla la tipografía ligada al scroll, las entradas con IntersectionObserver, el CTA magnético y el indicador de lectura; no requiere librerías de animación.
 
-El botón de movimiento permite pausar o activar las animaciones y recuerda la elección durante la sesión. Inicialmente respeta `prefers-reduced-motion`; una activación explícita permite las animaciones decorativas. Sin JavaScript el contenido sigue visible. Los efectos de puntero se limitan a dispositivos con mouse. El otro script de interfaz copia el email.
+Las animaciones se activan automáticamente y respetan `prefers-reduced-motion`, sin botón ni preferencias guardadas. El retrato permanece estático dentro del hero, sin paralaje ni animación de entrada. Sin JavaScript el contenido sigue visible. Los efectos de puntero se limitan a dispositivos con mouse. El otro script de interfaz copia el email.
 
 `src/styles/editorial-content.css` desarrolla los capítulos: selector accesible de experiencia bancaria (`ExperienceStage.astro`), proyectos con composiciones conceptuales, liderazgo con tótem ilustrado en CSS (`LeadershipLab.astro`), capacidades desplegables y credenciales en una composición de fichas. El selector de experiencia admite flechas, Home y End; sin JavaScript muestra todas las etapas.
 
