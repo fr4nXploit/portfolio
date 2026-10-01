@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects';
+import { Image } from 'astro:assets';
+import { brands } from '../../data/brands';
+export function getStaticPaths() { return projects.map(project => ({ params: { slug: project.slug }, props: { project } })); }
+const { project: p } = Astro.props;
+const index = projects.findIndex(project => project.slug === p.slug);
+const next = projects[(index + 1) % projects.length];
+---
+<Layout title={`${p.name} — Francesco Rios Anton`} description={p.summary}>
+  <article class="case-study section-wrap">
+    <a class="text-link case-back" href="/#proyectos">← Todos los proyectos</a>
+    {p.slug === 'espartanos' && <div class="case-brand case-brand-light"><Image src={brands.espartanos} alt="Espartanos" width={320} loading="eager" /></div>}
+    {p.slug === 'estas-con-suerte' && <div class="case-brand case-brand-dark"><Image src={brands.suerte} alt="Estás con Suerte" width={320} loading="eager" /></div>}
+    <header class="case-header"><p class="eyebrow">CASO {String(index + 1).padStart(2, '0')} / {p.category}</p><h1>{p.name}<span>.</span></h1><p>{p.summary}</p><div class="case-meta"><span>{p.role}</span>{p.year && <span>{p.year}</span>}{p.url && <a class="text-link" href={p.url} target="_blank" rel="noopener noreferrer">{p.slug === 'winpwnshell' ? 'Ver repositorio' : 'Visitar sitio'} ↗</a>}</div></header>
+    <div class="case-content"><aside><p class="eyebrow">EN ESTE CASO</p><nav aria-label="Índice del caso"><a href="#contexto">Contexto y desafío</a><a href="#rol">Mi participación</a><a href="#arquitectura">Arquitectura</a>{p.security && <a href="#seguridad">Seguridad</a>}<a href="#resultado">Resultado</a><a href="#stack">Tecnologías</a></nav></aside><div class="case-sections">
+      <section id="contexto"><p class="eyebrow">01 / CONTEXTO</p><h2>El desafío.</h2><p>{p.challenge}</p></section>
+      <section id="rol"><p class="eyebrow">02 / PARTICIPACIÓN</p><h2>Mi trabajo en el proyecto.</h2><p>{p.work}</p></section>
+      <section id="arquitectura"><p class="eyebrow">03 / ARQUITECTURA</p><h2>Cómo se conecta.</h2><p class="muted">Vista conceptual de los componentes del proyecto.</p><ol class="architecture">{p.architecture.map((layer, i) => <li><span class="eyebrow">0{i + 1}</span><span>{layer}</span><span aria-hidden="true">{i < p.architecture.length - 1 ? '↓' : '↳'}</span></li>)}</ol></section>
+      {p.security && <section id="seguridad"><p class="eyebrow">04 / SEGURIDAD</p><h2>Consideraciones técnicas.</h2><p>{p.security}</p></section>}
+      <section id="resultado"><p class="eyebrow">05 / RESULTADO</p><h2>El alcance del trabajo.</h2><p>{p.outcome}</p></section>
+      {p.learning && <section><h2>Aprendizajes.</h2><p>{p.learning}</p></section>}
+      <section id="stack"><p class="eyebrow">06 / TECNOLOGÍAS</p><div class="tags">{p.stack.map(item => <span>{item}</span>)}</div></section>
+    </div></div>
+    <a class="next-project" href={`/work/${next.slug}/`}><span class="eyebrow">SIGUIENTE PROYECTO</span><span>{next.name} ↗</span></a>
+  </article>
+</Layout>
+
+

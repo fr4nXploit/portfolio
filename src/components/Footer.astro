@@ -1,0 +1,18 @@
+---
+import { profile } from '../data/profile';
+---
+<footer id="contacto" class="contact section-wrap">
+  <p class="eyebrow">08 / SIGUIENTE CONVERSACIÓN</p>
+  <div class="contact-main"><h2>La seguridad empieza<br/>por entender <em>el sistema.</em></h2><a class="contact-orb" href={`mailto:${profile.email}`} aria-label="Enviar un email a Francesco">Hablemos <span aria-hidden="true">↗</span></a></div>
+  <div class="contact-bottom"><div><a class="email" href={`mailto:${profile.email}`}>{profile.email}</a><button id="copy-email" data-email={profile.email} type="button">Copiar email <span aria-hidden="true">↗</span></button><span id="copy-status" class="copy-status" role="status"></span></div><div class="social-links"><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div>
+  <div class="footer-meta"><span>© {new Date().getFullYear()} Francesco Rios Anton</span><span>Lima, Perú · Español / English B1</span><a href="#main">Volver arriba ↑</a></div>
+</footer>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#copy-email');
+  button?.addEventListener('click', async () => {
+    const status = document.querySelector<HTMLElement>('#copy-status');
+    try { await navigator.clipboard.writeText(button.dataset.email!); if (status) status.textContent = 'Email copiado'; }
+    catch { if (status) status.textContent = 'Puedes seleccionar y copiar el email mostrado.'; }
+  });
+</script>
+

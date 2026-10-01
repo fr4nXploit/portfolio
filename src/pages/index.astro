@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/francesco.png';
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
+import { capabilities, profile } from '../data/profile';
+import { certifications } from '../data/certifications';
+import CredentialArchive from '../components/CredentialArchive.astro';
+import { projects } from '../data/projects';
+import Motion from '../components/Motion.astro';
+import ExperienceStage from '../components/ExperienceStage.astro';
+import LeadershipLab from '../components/LeadershipLab.astro';
+---
+<Layout>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-slab" aria-hidden="true"><span>BETWEEN SYSTEMS & SECURITY</span></div>
+    <div class="hero-top"><p class="eyebrow">CYBERSECURITY / ENGINEERING / PORTFOLIO</p><p class="eyebrow location"><span class="location-dot"></span> LIMA, PERÚ</p></div>
+    <div class="orbit-system" aria-hidden="true"><div class="orbit-inner"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="portrait-wrap"><Image class="portrait" src={portrait} alt="Retrato profesional de Francesco Rios Anton" widths={[480, 800, 1100]} sizes="(max-width: 700px) 90vw, 52vw" format="webp" quality={85} loading="eager" fetchpriority="high" /></div>
+    <div class="hero-title"><h1 id="hero-title"><span class="title-first">Francesco</span> <span class="title-last">Rios Anton</span></h1></div>
+    <div class="hero-description"><span class="eyebrow">01 — EL PUNTO DE ENCUENTRO</span><p>Entiendo cómo<br/>se construye.<br/><span>Para saber cómo<br/>protegerlo.</span></p><a class="text-link" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+    <div class="hero-action-panel"><span class="eyebrow">SECURITY ENGINEERING<br/>SOFTWARE & TECHNICAL LEADERSHIP</span><a class="explore-disc" href="#proyectos" data-magnetic><span>EXPLORAR<br/>PROYECTOS</span><b aria-hidden="true">↗</b></a></div>
+    <div class="hero-bottom"><span class="eyebrow">SEGURIDAD CON VISIÓN DE SISTEMA.</span><a class="scroll-cue" href="#experiencia"><span>DESLIZA PARA EXPLORAR</span><span aria-hidden="true">↓</span></a><span class="eyebrow hero-edition">INDEPENDENT MIND. / CONNECTED THINKING.</span></div>
+  </section>
+  <div class="kinetic-band" aria-hidden="true"><div class="kinetic-track"><span>UNDERSTAND THE SYSTEM.</span><span class="outline-word">CHALLENGE THE ASSUMPTIONS.</span><span>BUILD WITH INTENT.</span></div></div>
+  <div class="intro-strip section-wrap"><span class="eyebrow">UNA VISIÓN CONECTADA</span><p>Desde detección y automatización en entornos financieros hasta arquitectura y ejecución de plataformas digitales.</p><span class="intro-cross" aria-hidden="true">↗</span></div>
+  <section id="experiencia" class="section-wrap experience-section">
+    <ExperienceStage />
+  </section>
+  <section id="proyectos" class="section-wrap work-section">
+    <SectionHeading number="02" label="PROYECTOS SELECCIONADOS" title="Menos promesas. Más sistemas."><p>Arquitectura, producto e investigación.<br/>Abre un proyecto. Mira cómo se conecta.</p></SectionHeading>
+    <div class="projects-grid">{projects.map((project, index) => <ProjectPreview project={project} index={index} />)}</div>
+  </section>
+  <section id="liderazgo" class="leadership-section section-wrap">
+    <LeadershipLab />
+  </section>
+  <section class="manifesto section-wrap" aria-label="Mi enfoque"><span class="eyebrow">UNA MISMA FORMA DE PENSAR / TRES PERSPECTIVAS</span><div class="manifesto-lines"><p><span class="eyebrow">01</span><span>Entender<span class="manifesto-dot">.</span></span><small>EL SISTEMA</small></p><p><span class="eyebrow">02</span><span>Cuestionar<span class="manifesto-dot">.</span></span><small>LOS SUPUESTOS</small></p><p><span class="eyebrow">03</span><span>Construir<span class="manifesto-dot">.</span></span><small>CON CRITERIO</small></p></div></section>
+  <section id="sobre-mi" class="about-section section-wrap">
+    <p class="eyebrow">04 / SOBRE MÍ</p><div class="about-body"><h2>La seguridad no existe<br/>de forma <em>aislada.</em></h2><div class="about-copy"><p>Mi trabajo está en la intersección entre ciberseguridad e ingeniería. Analizo controles y capacidades de detección, pero también entiendo las APIs, el backend, la infraestructura y los despliegues que los sostienen.</p><p>La experiencia en banca me ha acercado a problemas de seguridad y operación. Construir plataformas completas me permite abordarlos con una perspectiva más amplia.</p><span class="about-signature">Francesco Rios Anton<span>CYBERSECURITY & ENGINEERING</span></span></div></div>
+  </section>
+  <section class="community-section section-wrap"><p class="eyebrow">05 / DOCENCIA & COMUNIDAD</p><h2>Compartir también<br/>es construir.</h2><div><h3>Tutor de Ciberseguridad</h3><span class="community-name">Hxploit UPC</span><p>Sesiones prácticas de Linux, seguridad web, SQL Injection y resolución de retos. Acompaño a estudiantes en laboratorios y en la comprensión de vulnerabilidades.</p></div></section>
+  <section class="capabilities-section section-wrap"><div class="capability-intro"><p class="eyebrow">06 / CAPACIDADES</p><h2>El stack cambia.<br/><em>El criterio conecta.</em></h2><p>Explora las herramientas detrás de cada disciplina.</p></div><div class="capability-accordion">{capabilities.map((group, index) => <details class="capability-row" open={index === 0}><summary><span class="eyebrow">0{index + 1}</span><h3>{group.name}</h3><span class="capability-plus" aria-hidden="true">+</span></summary><div class="capability-content"><p class="eyebrow">{index === 0 ? 'EVALUAR / DETECTAR / RESPONDER' : index === 1 ? 'DISEÑAR / CONSTRUIR / INTEGRAR' : 'PERSISTIR / DESPLEGAR / OPERAR'}</p><ul>{[...group.primary, ...group.more].map(item => <li>{item}</li>)}</ul></div></details>)}</div></section>
+  <section class="credentials-section section-wrap"><div class="credentials-grid"><div class="education"><p class="eyebrow">07 / FORMACIÓN & CERTIFICACIONES</p><h2>El trabajo tiene<br/><em>fundamentos.</em></h2><article><p class="eyebrow">UNIVERSIDAD PERUANA DE CIENCIAS APLICADAS</p><h3>Ingeniería de Sistemas<br/>de Información</h3><p>UPC · 10.º ciclo · próximo a egresar</p></article><article><p class="eyebrow">INSTITUTO TECSUP · AGO 2024</p><h3>Especialización en Ciberseguridad<br/>y Hacking Ético</h3></article></div><div class="credential-deck">{certifications.map((cert, index) => <article class="credential-ticket"><div class="ticket-top"><span>{cert.issuer.toUpperCase()}</span><time datetime={cert.date}>{cert.dateLabel}</time></div><h3>{cert.name}</h3><p>{cert.title}</p><div class="ticket-bottom"><span>{index === 0 ? 'THREAT HUNTING' : 'PENETRATION TESTING'}</span><span aria-hidden="true">↗</span></div></article>)}</div></div><CredentialArchive /></section>
+  <Motion />
+</Layout>
+
+

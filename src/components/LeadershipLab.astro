@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import { brands } from '../data/brands';
+import { sites } from '../data/sites';
+---
+<div class="leadership-lab">
+  <div class="lab-heading"><p class="eyebrow">03 / LIDERAZGO TÉCNICO</p><h2>Pienso en sistemas.<br/><span>Los llevo a producción.</span></h2></div>
+  <article class="sentinels-panel">
+    <div class="sentinels-top"><p class="eyebrow">SENTINELS CONSULTING S.A.C.</p><span class="eyebrow">2026 — ACTUALIDAD</span></div>
+    <h3>Builder.<br/><em>Technical lead.</em></h3>
+    <div class="sentinels-copy"><h4>Founder & Technical Lead</h4><p>Lidero proyectos end-to-end y coordino desarrollo, diseño, QA e infraestructura. De los requerimientos y la arquitectura al despliegue y la capacitación.</p></div>
+    <div class="build-process" aria-label="Fases de los proyectos"><span>Definir</span><b>↗</b><span>Construir</span><b>↗</b><span>Validar</span><b>↗</b><span>Operar</span></div>
+    <p class="lab-footnote">Software a medida / Consultoría / Secure Software Development</p>
+  </article>
+  <article class="kioscos-panel">
+    <div class="kioscos-copy"><Image src={brands.kioscosia} alt="Kioscos IA" width={330} format="webp" loading="lazy" /><p class="eyebrow">AGO 2025 — ACTUALIDAD</p><h3>Del software<br/>al mundo físico.</h3><h4>Technical Lead / Software Development</h4><p>Tótems inteligentes, displays y componentes embebidos. Implementación desde cero, integración WebView en C#, despliegue y seguimiento operativo.</p><a class="text-link" href={sites.kioscosia} target="_blank" rel="noopener noreferrer">Explorar Kioscos IA ↗</a></div>
+    <div class="kiosk-diagram" aria-label="Esquema conceptual de un tótem conectado a infraestructura web"><div class="kiosk-orbit" aria-hidden="true"></div><div class="kiosk-device"><div class="kiosk-screen"><span>WEB ↔ DEVICE</span><div class="kiosk-screen-mark">↗</div><small>SOFTWARE<br/>EN EL MUNDO REAL</small></div><div class="kiosk-neck"></div><div class="kiosk-base"></div></div><span class="kiosk-caption">WEBVIEW / C# / INFRAESTRUCTURA</span></div>
+  </article>
+</div>
+

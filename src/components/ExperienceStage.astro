@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import { experience } from '../data/profile';
+import { brands } from '../data/brands';
+const chapters = [
+  { ...experience[1], id: 'engineering', year: '2025', label: 'Detection & response', title: ['Detectar mejor.', 'Responder con criterio.'], logo: brands.bcp },
+  { ...experience[0], id: 'integrations', year: '2026', label: 'Integraciones & automatización', title: ['Conectar servicios.', 'Entender la escala.'], logo: brands.bbva },
+  { ...experience[2], id: 'foundations', year: '2024', label: 'Evaluación defensiva', title: ['Evaluar controles.', 'Conocer sus límites.'], logo: brands.bcp },
+];
+---
+<div class="career-stage">
+  <div class="career-index">
+    <p class="eyebrow">01 / EXPERIENCIA EN BANCA</p>
+    <h2>Donde el <br/>criterio<br/><em>se prueba.</em></h2>
+    <p>Seguridad, operación y software.<br/>Tres etapas. Una visión conectada.</p>
+    <div class="career-tabs" aria-label="Etapas de experiencia">
+      {chapters.map((chapter, index) => <button type="button" id={`tab-${chapter.id}`} data-career-tab={chapter.id} aria-controls={`career-${chapter.id}`}><span class="career-tab-index">0{index + 1}</span><span><strong>{chapter.company}</strong><small>{chapter.label}</small></span><span class="career-tab-arrow" aria-hidden="true">↗</span></button>)}
+    </div>
+    <span class="career-index-note">SELECCIONA UNA ETAPA ↑</span>
+  </div>
+  <div class="career-panels">
+    {chapters.map(chapter => <article class="career-panel" id={`career-${chapter.id}`} data-career-panel={chapter.id} aria-labelledby={`tab-${chapter.id}`}>
+      <div class="career-panel-top"><Image src={chapter.logo} alt={chapter.company === 'BCP' ? 'Banco de Crédito del Perú — BCP' : 'BBVA'} width={220} format="webp" loading="lazy" /><span class="eyebrow">{chapter.dates}</span></div>
+      <div class="career-number" aria-hidden="true">{chapter.year.slice(2)}</div>
+      <div class="career-story"><p class="eyebrow">{chapter.role}</p><h3>{chapter.title[0]}<br/><span>{chapter.title[1]}</span></h3><p>{chapter.description}</p></div>
+      <details class="career-detail"><summary>Dentro del trabajo <span aria-hidden="true">+</span></summary><p>{chapter.details}</p></details>
+      <div class="career-panel-bottom"><div class="tags">{chapter.tags.map(tag => <span>{tag}</span>)}</div><span class="career-year">{chapter.year} ↗</span></div>
+    </article>)}
+  </div>
+</div>
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-career-tab]'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-career-panel]'));
+  const tablist = document.querySelector('.career-tabs');
+  function selectTab(index: number, focus = false) {
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === index));
+      tab.tabIndex = i === index ? 0 : -1;
+      panels[i].hidden = i !== index;
+    });
+    if (focus) tabs[index].focus();
+  }
+  tablist?.setAttribute('role', 'tablist');
+  tabs.forEach((tab, index) => {
+    tab.setAttribute('role', 'tab');
+    panels[index].setAttribute('role', 'tabpanel');
+    panels[index].tabIndex = 0;
+    tab.addEventListener('click', () => selectTab(index));
+    tab.addEventListener('keydown', event => {
+      let next = index;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % tabs.length;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index + tabs.length - 1) % tabs.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      selectTab(next, true);
+    });
+  });
+  selectTab(0);
+</script>

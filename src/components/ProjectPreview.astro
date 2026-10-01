@@ -1,0 +1,18 @@
+---
+import type { Project } from '../data/projects';
+import { Image } from 'astro:assets';
+import { brands } from '../data/brands';
+interface Props { project: Project; index: number; }
+const { project: p, index } = Astro.props;
+---
+<a class:list={['project', `project-${p.visual}`]} href={`/work/${p.slug}/`}>
+  <div class="project-art" aria-hidden="true">
+    <div class="art-meta"><span>{String(index + 1).padStart(2, '0')} / SELECTED WORK</span><span>↗</span></div>
+    {p.visual === 'espartanos' && <div class="platform-art"><Image class="espartanos-logo" src={brands.espartanos} alt="" width={460} loading="lazy" /><div class="platform-planes"><div class="plane plane-web"><span>01 / WEB</span><strong>La entrada.</strong><i></i><i></i><i></i></div><div class="plane plane-mobile"><span>02 / MOBILE</span><strong>La experiencia.</strong><div class="mobile-symbol" aria-hidden="true">↗</div><small>ANDROID / IOS</small></div><div class="plane plane-admin"><span>03 / ADMIN</span><strong>El control.</strong><div class="admin-lines"><i></i><i></i><i></i></div></div></div><small class="platform-caption">UN ECOSISTEMA. TODOS SUS PUNTOS DE CONEXIÓN.</small></div>}
+    {p.visual === 'vocacional' && <div class="decision-art"><span>Una decisión.</span><strong>Muchos futuros.</strong><div class="tree"><i></i><i></i><i></i></div><small>DATOS → ORIENTACIÓN → POSIBILIDADES</small></div>}
+    {p.visual === 'research' && <div class="research-art"><span>CLIENT</span><b>⇄</b><span>SERVER</span><small>HTTP / SECURITY RESEARCH</small></div>}
+    {p.visual === 'suerte' && <div class="suerte-brand"><Image src={brands.suerte} alt="" width={500} loading="lazy" /><div class="suerte-path"><span>USUARIOS</span><b>↔</b><span>SUSCRIPCIONES</span><b>↔</b><span>PAGOS</span></div></div>}
+    <span class="art-foot">{p.year || 'ECOSISTEMA DIGITAL'}<span>{p.role}</span></span>
+  </div>
+  <div class="project-caption"><div><span class="project-sequence" aria-hidden="true">0{index + 1}</span><p class="eyebrow">{p.category}</p><h3>{p.name}</h3><p>{p.summary}</p>{p.visual === 'espartanos' && <div class="project-scope"><span>ARQUITECTURA</span><span>DESARROLLO</span><span>SEGURIDAD</span><span>DEPLOY</span></div>}{p.visual === 'suerte' && <div class="project-outcome"><strong>≈90<span>%</span></strong><p>Incremento en llegada de usuarios.<br/><small>Resultado reportado del proyecto.</small></p></div>}</div><span class="round-arrow" aria-label="Ver caso de estudio">↗</span></div>
+</a>
